@@ -13,11 +13,20 @@ npm run build    # genera /dist
 Build command `npm run build` · Output directory `dist` · Production branch `main`.
 Cada `git push` a `main` redespliega solo.
 
-## Dónde editar (todo en `src/App.jsx`)
-- Textos de la interfaz PT/ES/Kriolu: objetos `S`, `SC` y `DS`.
-- Texto jurídico del PDF (siempre portugués de Portugal): función `texto()`.
-- Municipios del selector: constante `MUN`.
-- Colores y modo oscuro: variables CSS en `src/index.css`.
+## Configuración rápida → `src/config.js`
+- **Logo de la ONG**: copia el archivo a `public/logo.png` (si no existe se muestra el icono de casa).
+- **Sugerencias de prueba**: `feedback.on` (true/false) y `feedback.whatsapp` (p. ej. `'351912345678'`; vacío = elige contacto).
+
+## Estructura (`src/`)
+- `config.js` ajustes · `i18n.js` textos `[pt, es, kr, en]` · `legal.js` texto jurídico + PDF
+- `ui.js` iconos, banderas, selector de idioma · `feedback.js` sugerencias e informe · `App.jsx` asistente
+- `index.css` colores AAA y modo oscuro · `public/` manifest, iconos, `sw.js`, `_headers`
+
+## Prueba de humo (opcional)
+```
+npm i jsdom --no-save
+node scripts/smoke.mjs
+```
 
 ## Aviso
-Herramienta de apoyo cívico; no sustituye el asesoramiento jurídico. Antes de difundirla, que un jurista revise las referencias legales y un hablante nativo el Kriolu.
+Herramienta de apoyo cívico; no sustituye el asesoramiento jurídico. Antes de difundirla, que un jurista revise las referencias legales y hablantes nativos el Kriolu y el inglés.
