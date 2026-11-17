@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Paleta AAA (contraste >= 7:1). Claro por defecto; oscuro automático. */
+:root {
+  --bg: 247 244 238; --card: 255 255 255; --ink: 17 24 39; --mute: 55 65 81;
+  --brand: 18 53 91; --bi: 255 255 255; --acc: 154 52 18; --line: 148 163 184;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: 15 23 42; --card: 30 41 59; --ink: 241 245 249; --mute: 203 213 225;
+    --brand: 147 197 253; --bi: 12 25 48; --acc: 253 186 116; --line: 100 116 139;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: 15 23 42; --card: 30 41 59; --ink: 241 245 249; --mute: 203 213 225;
+  --brand: 147 197 253; --bi: 12 25 48; --acc: 253 186 116; --line: 100 116 139;
+}
+
+html { font-size: var(--fs, 112.5%); scroll-padding-top: env(safe-area-inset-top, 0px); }
+body {
+  background: rgb(var(--bg)); color: rgb(var(--ink));
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  line-height: 1.55;
+}
+:focus-visible { outline: 4px solid rgb(var(--acc)); outline-offset: 3px; }
+.fi { animation: fi 0.25s ease-out; }
+@keyframes fi { from { opacity: 0; transform: translateY(6px); } }
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after { animation: none !important; transition: none !important; }
+}
