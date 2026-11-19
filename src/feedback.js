@@ -66,8 +66,8 @@ export function Sheet({ li, mode, setMode, close, ctx, extra, fb, setFb }) {
         h('button', { type: 'button', onClick: wipe, className: sec2 }, h(I, { n: 'trash', s: 20 }), t('clear')))),
     h('button', { type: 'button', onClick: () => setMode('new'), className: btn + 'w-full border-2 border-line' }, t('nova')))
 
-  return h('div', { className: 'fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60', onClick: (e) => { if (e.target === e.currentTarget) close() } },
-    h('div', { role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'fbt', className: 'w-full max-w-xl max-h-[92vh] overflow-auto rounded-t-3xl sm:rounded-3xl bg-card text-ink border-2 border-line p-5' },
+  return h('div', { className: 'fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 bk', onClick: (e) => { if (e.target === e.currentTarget) close() } },
+    h('div', { role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'fbt', className: 'sheet-in w-full max-w-xl max-h-[92vh] overflow-auto rounded-t-3xl sm:rounded-3xl bg-card text-ink border-2 border-line p-5' },
       h('div', { className: 'flex items-start justify-between gap-3 mb-3' },
         h('h2', { id: 'fbt', ref: hd, tabIndex: -1, className: 'font-serif text-2xl font-bold outline-none' }, mode === 'new' ? t('fbT') : t('fbRT')),
         h('button', { type: 'button', 'aria-label': t('close'), onClick: close, className: 'min-h-[2.75rem] min-w-[2.75rem] grid place-items-center rounded-lg border-2 border-line shrink-0' }, h(I, { n: 'x' }))),

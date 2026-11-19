@@ -1,5 +1,5 @@
 // Service worker mínimo. Página: red primero. /assets (con hash): caché primero. Resto: caché + refresco en segundo plano.
-const C = 'dt-v2'
+const C = 'dt-v3'
 self.addEventListener('install', () => self.skipWaiting())
 self.addEventListener('activate', (e) =>
   e.waitUntil(

@@ -1,6 +1,14 @@
 /* Texto jurídico y generación del PDF (siempre portugués de Portugal) */
-const fd=s=>new Date(s+'T12:00:00').toLocaleDateString('pt-PT',{day:'numeric',month:'long',year:'numeric'});
+const fd=s=>{const d=new Date(s+'T12:00:00');return isNaN(d)?'':d.toLocaleDateString('pt-PT',{day:'numeric',month:'long',year:'numeric'})};
 export const nifOk=v=>{let s=0;for(let i=0;i<8;i++)s+=v[i]*(9-i);let c=11-s%11;if(c>9)c=0;return c==v[8]};
+/* El PDF usa la fuente Times estándar (WinAnsi): no puede dibujar otras escrituras (bengalí, árabe, cirílico…).
+   latin() detecta texto que el PDF no podría mostrar; fold() convierte ă→a, ș→s, etc. para el resto. */
+const WIN=/[\t\n\r\u0020-\u007E\u00A0-\u00FF\u0152\u0153\u0160\u0161\u0178\u017D\u017E\u0192\u02C6\u02DC\u2013\u2014\u2018\u2019\u201A\u201C\u201D\u201E\u2020\u2021\u2022\u2026\u2030\u2039\u203A\u20AC\u2122]/;
+const base=c=>{const b=c.normalize('NFD')[0];return /[A-Za-z]/.test(b)?b:''};
+const chars=s=>Array.from(String(s||'').normalize('NFC'));
+export const latin=s=>chars(s).every(c=>WIN.test(c)||base(c));
+const fold=s=>chars(s).map(c=>WIN.test(c)?c:base(c)).join('');
+const clean=f=>{const c={};for(const k in f)c[k]=typeof f[k]==='string'?fold(f[k]):f[k];return c};
 export function texto(f){
  const mun=f.mun.trim().replace(/^c[âa]mara\s+municipal\s+d[eoa]s?\s+/i,''),dt=f.dt?fd(f.dt):'';
  const sv={agua:'água',luz:'energia elétrica',ambos:'água e energia elétrica'}[f.srv];
@@ -48,6 +56,7 @@ export function texto(f){
  return {mun,subject,facts,law,asks,close};
 }
 export function makePdf(f,jsPDF){
+ f=clean(f);
  const doc=new jsPDF({unit:'mm',format:'a4'}),W=210,M=25,TW=W-2*M,LH=5.8;let y=26;
  const nl=n=>{if(y+n>274){doc.addPage();y=26}};
  const P1=(s,o)=>{o=o||{};doc.setFont('times',o.b?'bold':'normal');doc.setFontSize(12);doc.splitTextToSize(s,o.w||TW).forEach(l=>{nl(LH);doc.text(l,o.x||M,y);y+=LH});y+=o.g==null?3:o.g};

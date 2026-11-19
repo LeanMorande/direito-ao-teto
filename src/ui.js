@@ -20,21 +20,46 @@ copy:'<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.
 share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>',
 send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
 x:'<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
-trash:'<path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/>'};
-export const I=({n,s=24})=>h('svg',{width:s,height:s,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor',strokeWidth:2,strokeLinecap:'round',strokeLinejoin:'round','aria-hidden':'true',className:'shrink-0',dangerouslySetInnerHTML:{__html:P[n]}});
+trash:'<path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/>',
+user:'<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+pin:'<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+phone:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
+moon:'<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
+auto:'<circle cx="12" cy="12" r="10"/><path d="M12 18a6 6 0 0 0 0-12v12z"/>',
+file:'<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
+app:'<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>',
+off:'<path d="M12 20h.01"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/><path d="M5 12.859a10 10 0 0 1 5.17-2.69"/><path d="M19 12.859a10 10 0 0 0-2.007-1.523"/><path d="M2 8.82a15 15 0 0 1 4.177-2.643"/><path d="M22 8.82a15 15 0 0 0-11.288-3.764"/><path d="m2 2 20 20"/>',
+info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>'};
+export const I=({n,s=24,c})=>h('svg',{width:s,height:s,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor',strokeWidth:2,strokeLinecap:'round',strokeLinejoin:'round','aria-hidden':'true',className:'shrink-0'+(c?' '+c:''),dangerouslySetInnerHTML:{__html:P[n]}});
 
-export const inp = 'w-full min-h-[3.5rem] rounded-xl border-2 bg-card px-4 py-2 text-lg '
-export const btn = 'min-h-[3.5rem] px-6 rounded-xl text-lg font-bold flex items-center justify-center gap-2 '
+export const inp = 'w-full min-h-[3.5rem] rounded-xl border-2 bg-card px-4 py-2 text-lg transition-colors focus:border-brand '
+export const btn = 'min-h-[3.5rem] px-6 rounded-xl text-lg font-bold flex items-center justify-center gap-2 transition active:scale-[.985] '
+// Botón en forma de pastilla para la barra de la cabecera (idioma, tamaño de letra)
+export const pill = 'min-h-[2.75rem] px-4 rounded-full border-2 border-white/30 bg-card text-ink shadow-md flex items-center gap-2 font-semibold transition active:scale-[.97] '
 
-export const Fld = ({ id, label, hint, err, children }) =>
+// Vibración corta (solo móviles que la permiten; nunca falla)
+export const buzz = (p) => { try { if (navigator.vibrate) navigator.vibrate(p) } catch (e) {} }
+// Sacudida del campo con error (Web Animations; se omite con "reducir movimiento")
+export const shake = (el) => {
+  try {
+    if (!el || !el.animate || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return
+    el.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-7px)' }, { transform: 'translateX(7px)' }, { transform: 'translateX(-4px)' }, { transform: 'translateX(0)' }], { duration: 320, easing: 'ease-out' })
+  } catch (e) {}
+}
+
+export const Fld = ({ id, label, hint, err, ok, children }) =>
   h('div', { className: 'mb-6' },
-    h('label', { htmlFor: id, className: 'block text-lg font-semibold mb-1' }, label),
+    h('div', { className: 'flex items-center justify-between gap-2 mb-1' },
+      h('label', { htmlFor: id, className: 'block text-lg font-semibold' }, label),
+      ok && !err ? h('span', { className: 'text-brand shrink-0 pop', 'aria-hidden': 'true' }, h(I, { n: 'check', s: 22 })) : null),
     hint ? h('p', { id: id + 'h', className: 'text-mute mb-2' }, hint) : null,
     children,
-    err ? h('p', { id: id + 'e', role: 'alert', className: 'mt-2 font-semibold text-acc flex gap-2 items-center' }, h(I, { n: 'tri', s: 20 }), err) : null)
+    err ? h('p', { id: id + 'e', role: 'alert', className: 'mt-2 font-semibold text-acc flex gap-2 items-start' }, h('span', { className: 'mt-1' }, h(I, { n: 'tri', s: 20 })), err) : null)
 
 export const Opt = ({ id, type, name, on, set, txt }) =>
-  h('label', { className: 'flex items-center gap-4 min-h-[3.5rem] p-4 mb-3 rounded-xl border-2 cursor-pointer ' + (on ? 'border-brand bg-brand/10' : 'border-line bg-card') },
+  h('label', { className: 'flex items-center gap-4 min-h-[3.5rem] p-4 mb-3 rounded-xl border-2 cursor-pointer transition active:scale-[.99] ' + (on ? 'border-brand bg-brand/10' : 'border-line bg-card') },
     h('input', { id, type: type || 'checkbox', name, checked: on, onChange: set, className: 'w-7 h-7 shrink-0 accent-[rgb(var(--brand))]' }),
     h('span', { className: 'text-lg' }, txt))
 
@@ -45,14 +70,21 @@ const FL = {
   es: '<rect width="60" height="40" fill="#AA151B"/><rect y="10" width="60" height="20" fill="#F1BF00"/>',
   en: '<rect width="60" height="40" fill="#012169"/><path d="M0 0 60 40M60 0 0 40" stroke="#fff" stroke-width="7"/><path d="M0 0 60 40M60 0 0 40" stroke="#C8102E" stroke-width="3"/><path d="M30 0V40M0 20H60" stroke="#fff" stroke-width="11"/><path d="M30 0V40M0 20H60" stroke="#C8102E" stroke-width="6"/>',
   kr: '<rect width="60" height="40" fill="#003893"/><rect y="22" width="60" height="4" fill="#fff"/><rect y="26" width="60" height="4" fill="#CF2027"/><rect y="30" width="60" height="4" fill="#fff"/>' + Array.from({ length: 10 }, (_, i) => star(i)).join(''),
+  fr: '<rect width="20" height="40" fill="#0055A4"/><rect x="20" width="20" height="40" fill="#fff"/><rect x="40" width="20" height="40" fill="#EF4135"/>',
+  bn: '<rect width="60" height="40" fill="#006A4E"/><circle cx="27" cy="20" r="11" fill="#F42A41"/>',
 }
 export const Flag = ({ c }) => h('svg', { viewBox: '0 0 60 40', width: 28, height: 19, 'aria-hidden': 'true', className: 'shrink-0 rounded-sm border border-line', dangerouslySetInnerHTML: { __html: FL[c] } })
 
-/* Índice = posición en los textos [pt, es, kr, en] de i18n.js */
-export const LANGS = [{ i: 0, c: 'pt', n: 'Português', l: 'pt-PT' }, { i: 1, c: 'es', n: 'Español', l: 'es' }, { i: 3, c: 'en', n: 'English', l: 'en' }, { i: 2, c: 'kr', n: 'Kriolu', l: 'kea' }]
+/* i = posición en los textos [pt, es, kr, en, fr, bn] de i18n.js · l = código BCP-47 (atributo lang). El orden de la lista es el del menú. */
+export const LANGS = [
+  { i: 0, c: 'pt', n: 'Português', l: 'pt-PT' }, { i: 1, c: 'es', n: 'Español', l: 'es' }, { i: 3, c: 'en', n: 'English', l: 'en' },
+  { i: 2, c: 'kr', n: 'Kriolu', l: 'kea' }, { i: 4, c: 'fr', n: 'Français', l: 'fr' }, { i: 5, c: 'bn', n: 'বাংলা', l: 'bn' },
+]
+export const LC = [], LK = []
+LANGS.forEach((x) => { LC[x.i] = x.l; LK[x.i] = x.c })
 
-export function LangMenu({ li, setLi, label }) {
-  const [o, setO] = useState(false), r = useRef(null)
+// Cierra un menú al pulsar fuera o con Escape
+export function useAway(o, setO, r) {
   useEffect(() => {
     if (!o) return
     const away = (e) => { if (r.current && !r.current.contains(e.target)) setO(false) }
@@ -60,11 +92,37 @@ export function LangMenu({ li, setLi, label }) {
     document.addEventListener('pointerdown', away); document.addEventListener('keydown', esc)
     return () => { document.removeEventListener('pointerdown', away); document.removeEventListener('keydown', esc) }
   }, [o])
-  const cur = LANGS.find((l) => l.i === li)
-  return h('div', { ref: r, className: 'relative' },
-    h('button', { type: 'button', 'aria-haspopup': 'listbox', 'aria-expanded': o, 'aria-label': label, onClick: () => setO(!o), className: 'min-h-[2.75rem] px-3 rounded-lg border-2 border-line bg-card flex items-center gap-2 font-semibold' },
-      h(Flag, { c: cur.c }), cur.n, h(I, { n: 'chev', s: 18 })),
-    o ? h('ul', { role: 'listbox', 'aria-label': label, className: 'absolute right-0 z-40 mt-2 w-52 rounded-xl border-2 border-line bg-card shadow-lg overflow-hidden' },
-      LANGS.map((l) => h('li', { key: l.c, role: 'presentation' },
-        h('button', { type: 'button', role: 'option', lang: l.l, 'aria-selected': l.i === li, onClick: () => { setLi(l.i); setO(false) }, className: 'w-full min-h-[3rem] px-3 flex items-center gap-3 text-left ' + (l.i === li ? 'bg-brand/10 font-bold' : '') }, h(Flag, { c: l.c }), l.n)))) : null)
 }
+
+export function LangMenu({ li, setLi, label }) {
+  const [o, setO] = useState(false), r = useRef(null)
+  useAway(o, setO, r)
+  const cur = LANGS.find((l) => l.i === li) || LANGS[0]
+  return h('div', { ref: r, className: 'relative' },
+    h('button', { type: 'button', 'aria-haspopup': 'listbox', 'aria-expanded': o, 'aria-label': label + ': ' + cur.n, onClick: () => setO(!o), className: pill },
+      h(Flag, { c: cur.c }), h('span', { lang: cur.l }, cur.n), h(I, { n: 'chev', s: 18, c: 'transition-transform ' + (o ? 'rotate-180' : '') })),
+    o ? h('ul', { role: 'listbox', 'aria-label': label, className: 'pop absolute left-0 z-40 mt-2 w-60 max-w-[calc(100vw-2rem)] rounded-2xl border-2 border-line bg-card text-ink shadow-xl overflow-hidden' },
+      LANGS.map((l) => h('li', { key: l.c, role: 'presentation' },
+        h('button', { type: 'button', role: 'option', lang: l.l, 'aria-selected': l.i === li, onClick: () => { setLi(l.i); setO(false) }, className: 'w-full min-h-[3.25rem] px-4 flex items-center gap-3 text-left transition-colors hover:bg-brand/10 ' + (l.i === li ? 'bg-brand/10 font-bold' : '') },
+          h(Flag, { c: l.c }), h('span', { className: 'grow' }, l.n), l.i === li ? h(I, { n: 'check', s: 20, c: 'text-brand' }) : null)))) : null)
+}
+
+/* Casa que se construye con los pasos: n = tramos dibujados (0-4, uno por paso del asistente). done = documento listo (se rellena y "salta").
+   Cada tramo se anima al cambiar n; el tejado usa el rojo del logo. */
+const HP = ['M6 52H58M14 52V30H50V52', 'M27 52V41a5 5 0 0 1 10 0V52', 'M8 33 32 11 56 33', 'M45 21V12h6v15M18 37h7v7h-7z']
+export function House({ n, done, c }) {
+  const [k, setK] = useState(Math.max(0, n - 1))
+  useEffect(() => { const t = setTimeout(() => setK(n), 60); return () => clearTimeout(t) }, [n])
+  return h('svg', { viewBox: '0 0 64 56', className: 'house ' + (done ? 'done ' : '') + (c || ''), 'aria-hidden': 'true' },
+    h('path', { d: HP.join(''), className: 'hg' }),
+    h('path', { d: 'M14 52V30H50V52ZM8 33 32 11 56 33Z', className: 'hf' }),
+    HP.map((d, i) => h('path', { key: i, d, pathLength: 1, className: 'hs' + (i === 2 ? ' rf' : '') + (k > i ? ' on' : '') })))
+}
+
+/* Tilde animada con salpicadura de puntos (pantalla final) */
+const PT = Array.from({ length: 14 }, (_, i) => { const a = i * (Math.PI * 2 / 14) + 0.2, d = 52 + (i % 3) * 12; return { x: Math.round(Math.cos(a) * d), y: Math.round(Math.sin(a) * d), c: ['--brand', '--red', '--acc'][i % 3] } })
+export const Check = () => h('div', { className: 'relative w-24 h-24 text-brand', 'aria-hidden': 'true' },
+  PT.map((p, i) => h('span', { key: i, className: 'bp', style: { '--x': p.x + 'px', '--y': p.y + 'px', background: 'rgb(var(' + p.c + '))' } })),
+  h('svg', { viewBox: '0 0 52 52', className: 'w-full h-full' },
+    h('circle', { cx: 26, cy: 26, r: 23, pathLength: 1, className: 'ring', fill: 'rgb(var(--brand) / .12)', stroke: 'currentColor', strokeWidth: 3 }),
+    h('path', { d: 'M15 27l8 8 14-16', pathLength: 1, className: 'ck', fill: 'none', stroke: 'currentColor', strokeWidth: 4, strokeLinecap: 'round', strokeLinejoin: 'round' })))

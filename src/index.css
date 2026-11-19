@@ -2,34 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Paleta AAA (contraste >= 7:1). Claro por defecto; oscuro automático. */
+/* Paleta AAA (contraste >= 7:1 en texto). Claro por defecto; oscuro automático o elegido a mano (data-theme).
+   --band/--band2: franja de cabecera · --red: rojo del logo (solo decorativo) · --ta/--tb/--tc: mosaicos de escenario. */
 :root {
   --bg: 247 244 238; --card: 255 255 255; --ink: 17 24 39; --mute: 55 65 81;
-  --brand: 18 53 91; --bi: 255 255 255; --acc: 154 52 18; --line: 148 163 184;
+  --brand: 18 53 91; --bi: 255 255 255; --acc: 155 28 28; --line: 148 163 184;
+  --band: 18 53 91; --band2: 31 78 128; --red: 228 30 38;
+  --ta: 185 28 28; --tb: 14 116 144; --tc: 21 128 61;
+  color-scheme: light dark;
   box-sizing: border-box;
-  padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     --bg: 15 23 42; --card: 30 41 59; --ink: 241 245 249; --mute: 203 213 225;
-    --brand: 147 197 253; --bi: 12 25 48; --acc: 253 186 116; --line: 100 116 139;
+    --brand: 147 197 253; --bi: 12 25 48; --acc: 252 165 165; --line: 100 116 139;
+    --band: 11 29 54; --band2: 18 44 80; --red: 248 113 113;
+    --ta: 248 113 113; --tb: 34 211 238; --tc: 74 222 128;
   }
 }
 :root[data-theme='dark'] {
   --bg: 15 23 42; --card: 30 41 59; --ink: 241 245 249; --mute: 203 213 225;
-  --brand: 147 197 253; --bi: 12 25 48; --acc: 253 186 116; --line: 100 116 139;
+  --brand: 147 197 253; --bi: 12 25 48; --acc: 252 165 165; --line: 100 116 139;
+  --band: 11 29 54; --band2: 18 44 80; --red: 248 113 113;
+  --ta: 248 113 113; --tb: 34 211 238; --tc: 74 222 128;
+  color-scheme: dark;
 }
+:root[data-theme='light'] { color-scheme: light; }
 
-html { font-size: var(--fs, 112.5%); scroll-padding-top: env(safe-area-inset-top, 0px); }
+html { font-size: var(--fs, 100%); scroll-padding-top: 1rem; -webkit-text-size-adjust: 100%; }
 body {
   background: rgb(var(--bg)); color: rgb(var(--ink));
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-  line-height: 1.55;
+  line-height: 1.55; -webkit-tap-highlight-color: transparent;
 }
+html { overflow-x: clip; } /* red de seguridad: nada puede ensanchar la página en el móvil */
+body { overflow-x: hidden; }
+::selection { background: rgb(var(--brand) / .25); }
 :focus-visible { outline: 4px solid rgb(var(--acc)); outline-offset: 3px; }
-.fi { animation: fi 0.25s ease-out; }
+.band :focus-visible { outline-color: #fff; }
+
+/* Cabecera: franja con textura de tejas suaves + placa blanca para el logo (centrada, a caballo entre franja y papel) */
+.band { background: linear-gradient(165deg, rgb(var(--band2)) 0%, rgb(var(--band)) 72%); border-radius: 0 0 2.25rem 2.25rem; }
+.band-fx {
+  position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none;
+  background:
+    radial-gradient(90% 130% at 100% 0%, rgb(255 255 255 / .17), transparent 60%),
+    repeating-linear-gradient(135deg, rgb(255 255 255 / .05) 0 2px, transparent 2px 24px);
+}
+.plate { box-shadow: 0 18px 32px -14px rgb(0 0 0 / .55), 0 0 0 5px rgb(255 255 255 / .16); animation: settle .6s cubic-bezier(.2, .9, .3, 1.15) both; }
+@keyframes settle { from { opacity: 0; transform: translateY(-14px) scale(.96); } }
+
+/* Transiciones de pantalla (adelante / atrás) y entradas */
+.fi { animation: fi .25s ease-out; }
 @keyframes fi { from { opacity: 0; transform: translateY(6px); } }
+.sf { animation: sf .26s cubic-bezier(.22, .8, .3, 1); }
+@keyframes sf { from { opacity: 0; transform: translateX(24px); } }
+.sb { animation: sb .26s cubic-bezier(.22, .8, .3, 1); }
+@keyframes sb { from { opacity: 0; transform: translateX(-24px); } }
+.stg { animation: fi .45s ease-out both; animation-delay: calc(var(--i, 0) * 70ms); }
+.pop { animation: pop .18s ease-out; }
+@keyframes pop { from { opacity: 0; transform: translateY(-6px) scale(.97); } }
+.sheet-in { animation: sheet .28s cubic-bezier(.22, .8, .3, 1); }
+@keyframes sheet { from { opacity: 0; transform: translateY(44px); } }
+.bk { animation: bk .2s ease-out; }
+@keyframes bk { from { opacity: 0; } }
+.spin { animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Casa que se va construyendo con cada paso: el tejado (rojo del logo) se cierra en el paso 4 */
+.hg { fill: none; stroke: rgb(var(--line)); stroke-width: 2; stroke-dasharray: 2 4; stroke-linecap: round; opacity: .6; }
+.hf { fill: rgb(var(--brand) / 0); transition: fill .6s ease .3s; }
+.house.done .hf { fill: rgb(var(--brand) / .14); }
+.hs { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .6s ease; }
+.hs.on { stroke-dashoffset: 0; }
+.hs.rf { stroke: rgb(var(--red)); }
+.house.done { animation: hop .6s .2s ease-out; }
+@keyframes hop { 40% { transform: translateY(-4px) scale(1.04); } }
+
+/* Pantalla final: anillo + tilde dibujados y salpicadura de puntos (el estado base ya es el final: sin animación se ve completo) */
+.ring, .ck { stroke-dasharray: 1; }
+.ring { animation: draw .7s ease-out both; }
+.ck { animation: draw .5s .35s ease-out both; }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.bp { position: absolute; left: 50%; top: 50%; width: .55rem; height: .55rem; margin: -.275rem; border-radius: 9999px; opacity: 0; animation: burst .95s cubic-bezier(.2, .8, .3, 1) .4s forwards; }
+@keyframes burst { 0% { opacity: 1; transform: translate(0, 0) scale(.5); } 70% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(1); } }
+.stamp { animation: stamp .55s .35s cubic-bezier(.2, .9, .3, 1.35) both; }
+@keyframes stamp { from { opacity: 0; transform: scale(1.25) rotate(-12deg); } to { opacity: 1; transform: scale(1) rotate(-3deg); } }
+
+/* Hoja de papel para la vista previa del documento (siempre clara, también en modo oscuro) */
+.paper { position: relative; background: linear-gradient(225deg, transparent 1.3rem, #fffefb 0); color: #111827; filter: drop-shadow(0 10px 14px rgb(15 23 42 / .3)); border-radius: .3rem; }
+.paper::after { content: ''; position: absolute; top: 0; right: 0; width: 1.3rem; height: 1.3rem; background: linear-gradient(225deg, transparent 50%, #e4dfd0 50%); border-bottom-left-radius: .25rem; }
+
+/* Escrituras no latinas: pila de fuentes del sistema (sin descargar fuentes: privacidad, CSP y modo sin conexión).
+   El latín sigue saliendo de la pila original; el bengalí cae a la primera fuente bengalí disponible. */
+:lang(bn) body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, 'Noto Sans Bengali', 'Nirmala UI', 'Bangla Sangam MN', Vrinda, Kalpurush, 'Lohit Bengali', sans-serif; line-height: 1.75; }
+:lang(bn) .font-serif { font-family: Georgia, 'Times New Roman', 'Noto Serif Bengali', 'Noto Sans Bengali', 'Nirmala UI', 'Bangla Sangam MN', Vrinda, serif; line-height: 1.4; }
+html:lang(bn) { font-size: calc(var(--fs, 100%) * 1.07); } /* el bengalí se lee más pequeño que el latín al mismo cuerpo */
+[lang='bn']:not(html) { font-size: 1.08em; }               /* nombre del idioma en el menú, estando en otra lengua */
+/* Si el texto del PDF (portugués) aparece dentro de otro idioma, se mantiene su tipografía */
+[lang='pt-PT'].paper, [lang='pt-PT'].paper * { font-family: Georgia, 'Times New Roman', serif; line-height: 1.55; }
+
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after { animation: none !important; transition: none !important; }
+  *, ::before, ::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
